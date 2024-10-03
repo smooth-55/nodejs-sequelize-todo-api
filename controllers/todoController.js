@@ -65,4 +65,17 @@ const UpdateOneTodoById = async (req, res) => {
 };
 
 
-module.exports = { CreateTodo, GetAllTodos, GetOneTodo, UpdateOneTodoById };
+// Delete a Todo
+const DeleteOneTodoById = async (req, res) => {
+    try {
+        const todo = await Todo.findByPk(req.params.id);
+        if (!todo) return response.NotFound(res, 'Todo Not found')
+        await todo.destroy();
+        response.Success(res, 'Todo deleted successfully')
+    } catch (err) {
+        response.InternalServerError(res, err.message)
+    }
+};
+
+
+module.exports = { CreateTodo, GetAllTodos, GetOneTodo, UpdateOneTodoById, DeleteOneTodoById };
