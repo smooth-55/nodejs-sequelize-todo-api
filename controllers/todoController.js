@@ -4,7 +4,7 @@ const { TodoSchema } = require('../validators/todoValidator');
 
 
 // Create a New Todo
-const addTodo = async (req, res) => {
+const CreateTodo = async (req, res) => {
     try {
         const { error, value } = TodoSchema.validate(req.body);
         if (error) {
@@ -22,4 +22,4 @@ const addTodo = async (req, res) => {
 };
 
 
-module.exports = { addTodo };
+module.exports = { CreateTodo };
