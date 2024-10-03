@@ -21,5 +21,15 @@ const CreateTodo = async (req, res) => {
     }
 };
 
+// Get All Todos
+const GetAllTodos = async (req, res) => {
+    try {
+        const todos = await Todo.findAll();
+        response.SuccessData(res, todos, "Todo fetched successfully")
 
-module.exports = { CreateTodo };
+    } catch (err) {
+        response.InternalServerError(res, err.message)
+    }
+};
+
+module.exports = { CreateTodo, GetAllTodos };
