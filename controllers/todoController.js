@@ -32,4 +32,15 @@ const GetAllTodos = async (req, res) => {
     }
 };
 
-module.exports = { CreateTodo, GetAllTodos };
+// Get Todo by ID
+const GetOneTodo = async (req, res) => {
+    try {
+        const todo = await Todo.findByPk(req.params.id);
+        if (!todo) return response.NotFound(res, 'Todo Not found')
+        response.SuccessData(res, todo, "Todo fetched successfully")
+    } catch (err) {
+        response.InternalServerError(res, err.message)
+    }
+};
+
+module.exports = { CreateTodo, GetAllTodos, GetOneTodo };
