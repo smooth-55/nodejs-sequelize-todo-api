@@ -43,4 +43,26 @@ const GetOneTodo = async (req, res) => {
     }
 };
 
-module.exports = { CreateTodo, GetAllTodos, GetOneTodo };
+
+// Update a Todo
+const UpdateOneTodoById = async (req, res) => {
+    try {
+        const todo = await Todo.findByPk(req.params.id);
+        if (!todo) return response.NotFound(res, 'Todo Not found')
+        const { error, value } = TodoSchema.validate(req.body);
+        if (error) {
+            response.BadReqest(res, error.details[0].message)
+        }
+        await todo.update({
+            title: value?.title,
+            description: value?.description,
+            status: value?.status
+        });
+        response.Created(res, newTodo, "Todo updated successfully")
+    } catch (err) {
+        response.InternalServerError(res, err.message)
+    }
+};
+
+
+module.exports = { CreateTodo, GetAllTodos, GetOneTodo, UpdateOneTodoById };
