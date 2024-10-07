@@ -41,7 +41,7 @@ jobs:
 
       - run: # Run simple manual tests
           name: Run Manual Test Cases
-          command: node ./manualTestCases.js
+          command: node ./tests/sampleTestCases.js
 
 workflows:
   version: 2
